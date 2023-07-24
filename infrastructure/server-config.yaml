@@ -5,3 +5,4 @@ metadata:
   namespace: gitops-test
 data:
   config: my-config
+  name: caoyong
