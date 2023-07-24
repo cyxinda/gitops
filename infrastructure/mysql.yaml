@@ -1,0 +1,36 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: mysql-test-gogogo
+spec:
+  components:
+    - name: mysql
+      properties:
+        cpu: '0.5'
+        exposeType: LoadBalancer
+        image: mysql:8.0.30
+        memory: 1024Mi
+        ports:
+          - expose: true
+            port: 3306
+            protocol: TCP
+      traits:
+        - properties:
+            replicas: 1
+          type: scaler
+        - properties:
+            pvc:
+              - mountPath: /var/lib/mysql
+                name: datavolumn
+                resources:
+                  limits:
+                    storage: 8Gi
+                  requests:
+                    storage: 3Gi
+          type: storage
+        - properties:
+            containerName: ''
+            env:
+              MYSQL_ROOT_PASSWORD: '123456789'
+          type: env
+      type: webservice
