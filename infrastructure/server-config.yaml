@@ -1,8 +1,7 @@
 apiVersion: v1
-data:
-  DB_HOST: "host"
-  SERVER_PORT: "80"
 kind: ConfigMap
 metadata:
-  name: config
+  name: server-config
   namespace: gitops-test
+data:
+  config: my-config
